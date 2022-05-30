@@ -3,11 +3,12 @@ package com.vald3nir.toolkit.data
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Ignore
 import com.google.gson.Gson
+import java.io.Serializable
 import java.util.UUID.randomUUID
 
 open class BaseDTO(
     @Ignore val uid: String = randomUUID().toString()
-) {
+) : Serializable {
 
     fun toJson(): String? {
         return Gson().toJson(this)
@@ -28,8 +29,6 @@ fun <T> baseDiffUtil(): DiffUtil.ItemCallback<T> = object : DiffUtil.ItemCallbac
     }
 
     override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
-//        if (oldItem is BaseDTO && newItem is BaseDTO)
         return oldItem == newItem
-//        else return false
     }
 }
