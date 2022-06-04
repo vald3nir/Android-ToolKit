@@ -67,4 +67,3 @@ class HeaderNavigationComponent : LinearLayout {
         binding.btnConfig.setOnClickListener { listener.invoke() }
     }
 }
-

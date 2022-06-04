@@ -4,4 +4,10 @@
         <attr name="title" />
         <attr name="showBackButton" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="CustomButtonComponent">
+        <attr name="title" />
+        <attr name="title_color" format="color" />
+        <attr name="background_color" format="color" />
+    </declare-styleable>
 </resources>
