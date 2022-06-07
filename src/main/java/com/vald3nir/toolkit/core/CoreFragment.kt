@@ -2,18 +2,24 @@ package com.vald3nir.toolkit.core
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.vald3nir.toolkit.data.BaseDTO
+import com.vald3nir.toolkit.data.dto.BaseDTO
 
 open class CoreFragment : Fragment() {
 
     var coreActivity: CoreActivity? = null
     var appView: AppView? = null
+    val onError: (e: Exception?) -> Unit = { showMessage(it) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (activity is CoreActivity) {
             coreActivity = activity as CoreActivity
         }
+    }
+
+    fun showMessage(e: Exception?) {
+        e?.printStackTrace()
+        coreActivity?.showMessage(e?.message)
     }
 
     fun showMessage(message: String?) {

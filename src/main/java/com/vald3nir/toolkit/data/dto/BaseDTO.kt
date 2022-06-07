@@ -1,8 +1,9 @@
-package com.vald3nir.toolkit.data
+package com.vald3nir.toolkit.data.dto
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Ignore
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.io.Serializable
 import java.util.UUID.randomUUID
 
@@ -16,6 +17,16 @@ open class BaseDTO(
 
     fun <T> fromJson(json: String?, classOfT: Class<T>): T {
         return Gson().fromJson(json, classOfT)
+    }
+
+    fun toMap(): Map<String, Any> {
+        return convert()
+    }
+
+    private inline fun <I, reified O> I.convert(): O {
+        val gson = Gson()
+        val json = gson.toJson(this)
+        return gson.fromJson(json, object : TypeToken<O>() {}.type)
     }
 }
 

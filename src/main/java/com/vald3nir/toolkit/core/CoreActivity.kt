@@ -10,6 +10,10 @@ open class CoreActivity : AppCompatActivity(), AppView {
 
     private var toast: Toast? = null
     private var customLoadingScreen: CustomLoadingScreen? = null
+    val onError: (e: Exception?) -> Unit = {
+        it?.printStackTrace()
+        showMessage(it?.message)
+    }
 
     override fun onResume() {
         super.onResume()
