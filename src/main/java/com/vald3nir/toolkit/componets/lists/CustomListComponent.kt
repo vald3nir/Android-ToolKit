@@ -22,13 +22,27 @@ class CustomListComponent : LinearLayout {
         orientation = VERTICAL
     }
 
-    data class CustomListTab(val title: String, val onTabSelectedListener: () -> Unit)
+    data class CustomListTab(val title: String, val onTabSelectedListener: () -> Unit = {})
 
     private val binding = CustomListComponentBinding.inflate(
         LayoutInflater.from(context), this, true
     )
 
     fun setTabs(tabs: List<CustomListTab>) {
+        binding.tblOptions.apply {
+            tabs.forEach { tab ->
+                addTab(newTab().setText(tab.title))
+            }
+            actionClickListener { position ->
+                tabs[position].onTabSelectedListener.invoke()
+            }
+            isVisible = true
+            tabGravity = TabLayout.GRAVITY_FILL
+        }
+    }
+
+    fun setTab(tab: CustomListTab) {
+        val tabs = listOf(tab)
         binding.tblOptions.apply {
             tabs.forEach { tab ->
                 addTab(newTab().setText(tab.title))

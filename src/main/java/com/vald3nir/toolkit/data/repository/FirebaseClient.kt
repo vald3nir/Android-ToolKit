@@ -7,7 +7,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.vald3nir.toolkit.data.dto.BaseDTO
 
-
 fun uploadFile(
     data: ByteArray,
     filePath: String,
@@ -16,10 +15,9 @@ fun uploadFile(
 ) {
     val storageRef: StorageReference = FirebaseStorage.getInstance().reference
     val mountainsRef = storageRef.child(filePath)
-    val uploadTask = mountainsRef.putBytes(data)
-    uploadTask
-        .addOnFailureListener { onError.invoke(it) }
+    mountainsRef.putBytes(data)
         .addOnSuccessListener { onSuccess.invoke() }
+        .addOnFailureListener { e -> onError.invoke(e) }
 }
 
 fun loadFile(
@@ -29,7 +27,7 @@ fun loadFile(
 ) {
     FirebaseStorage.getInstance().getReferenceFromUrl(filePath).downloadUrl
         .addOnSuccessListener { onSuccess.invoke(it) }
-        .addOnFailureListener { onError.invoke(it) }
+        .addOnFailureListener { e -> onError.invoke(e) }
 }
 
 fun updateData(
@@ -43,6 +41,25 @@ fun updateData(
         .document(baseDTO.uid)
         .set(baseDTO.toMap())
         .addOnSuccessListener { _ -> onSuccess.invoke() }
+        .addOnFailureListener { e -> onError.invoke(e) }
+}
+
+fun <T> loadCollection(
+    collectionPath: String,
+    type: Class<T>,
+    onSuccess: (items: MutableList<T>) -> Unit,
+    onError: (e: Exception?) -> Unit
+) {
+    val items: MutableList<T> = mutableListOf()
+    val db = Firebase.firestore
+    db.collection(collectionPath).get()
+        .addOnSuccessListener {
+            it.documents.map { document ->
+                val data: T? = document.toObject(type)
+                data?.let { it -> items.add(it) }
+            }
+            onSuccess.invoke(items)
+        }
         .addOnFailureListener { e -> onError.invoke(e) }
 }
 
