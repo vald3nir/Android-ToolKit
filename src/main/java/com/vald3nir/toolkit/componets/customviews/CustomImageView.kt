@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
 import com.vald3nir.toolkit.R
+import com.vald3nir.toolkit.extensions.toBitmap
 import java.io.ByteArrayOutputStream
 
 class CustomImageView : AppCompatImageView {
@@ -21,13 +22,23 @@ class CustomImageView : AppCompatImageView {
 
     fun showLoadingAnimation() {
         startAnimation(
-            AnimationUtils.loadAnimation(context, R.anim.rotate_indefinitely)
+            AnimationUtils.loadAnimation(
+                context, R.anim.rotate_indefinitely
+            )
         )
+    }
+
+    fun loadImageBase64(data: String?, placeholder: Int) {
+        try {
+            setImageBitmap(data.toBitmap())
+        } catch (e: Exception) {
+            e.printStackTrace()
+            loadImage(placeholder)
+        }
     }
 
     fun loadImage(uri: Uri, placeholder: Int) {
         Glide.with(context).load(uri)
-//            .centerCrop()
             .placeholder(placeholder)
             .into(this)
     }

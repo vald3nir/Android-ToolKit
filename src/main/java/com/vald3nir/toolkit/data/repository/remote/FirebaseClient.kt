@@ -1,11 +1,49 @@
-package com.vald3nir.toolkit.data.repository
+package com.vald3nir.toolkit.data.repository.remote
 
+import android.app.Activity
 import android.net.Uri
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.vald3nir.toolkit.data.dto.BaseDTO
+
+
+// =================================================================================================
+// Authentication
+// =================================================================================================
+
+fun disconnect() {
+    Firebase.auth.signOut()
+}
+
+fun loadCurrentUser(): FirebaseUser? {
+    return Firebase.auth.currentUser
+}
+
+fun signInWithEmailAndPassword(
+    activity: Activity,
+    email: String,
+    password: String,
+    onSuccess: () -> Unit,
+    onError: (e: Exception?) -> Unit
+) {
+    Firebase.auth.signInWithEmailAndPassword(email, password)
+        .addOnCompleteListener(activity) {
+            if (it.isSuccessful) {
+                onSuccess.invoke()
+            } else {
+                onError.invoke(it.exception)
+            }
+        }
+        .addOnFailureListener { e -> onError.invoke(e) }
+}
+
+// =================================================================================================
+// File Upload
+// =================================================================================================
 
 fun uploadFile(
     data: ByteArray,
@@ -30,6 +68,11 @@ fun loadFile(
         .addOnFailureListener { e -> onError.invoke(e) }
 }
 
+// =================================================================================================
+// Data Storage
+// =================================================================================================
+
+
 fun updateData(
     collectionPath: String,
     baseDTO: BaseDTO,
@@ -40,6 +83,20 @@ fun updateData(
     db.collection(collectionPath)
         .document(baseDTO.uid)
         .set(baseDTO.toMap())
+        .addOnSuccessListener { _ -> onSuccess.invoke() }
+        .addOnFailureListener { e -> onError.invoke(e) }
+}
+
+fun deleteData(
+    collectionPath: String,
+    baseDTO: BaseDTO,
+    onSuccess: () -> Unit,
+    onError: (e: Exception?) -> Unit
+) {
+    val db = Firebase.firestore
+    db.collection(collectionPath)
+        .document(baseDTO.uid)
+        .delete()
         .addOnSuccessListener { _ -> onSuccess.invoke() }
         .addOnFailureListener { e -> onError.invoke(e) }
 }

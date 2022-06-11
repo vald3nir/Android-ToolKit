@@ -8,6 +8,8 @@ import java.io.Serializable
 import java.util.UUID.randomUUID
 
 open class BaseDTO(
+//    @PrimaryKey(autoGenerate = true)
+//    var key: Int = 1,
     @Ignore val uid: String = randomUUID().toString()
 ) : Serializable {
 

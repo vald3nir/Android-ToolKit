@@ -3,14 +3,20 @@ package com.vald3nir.toolkit.componets.customviews
 import android.content.Context
 import android.os.Bundle
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.vald3nir.toolkit.databinding.CustomItemListBinding
 import com.vald3nir.toolkit.databinding.CustomSheetDialogBinding
 
-class CustomSheetDialog(context: Context, private val items: List<CustomItemSheet>) :
-    BottomSheetDialog(context) {
+class CustomSheetDialog(
+    context: Context,
+    private val title: String? = null,
+    private val titleColor: Int? = null,
+    private val items: List<CustomItemSheet>
+) : BottomSheetDialog(context) {
 
     init {
         setCancelable(true)
@@ -19,12 +25,19 @@ class CustomSheetDialog(context: Context, private val items: List<CustomItemShee
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = CustomSheetDialogBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
+        binding.initViews()
+    }
 
-        binding.rvItems.apply {
+    private fun CustomSheetDialogBinding.initViews() {
+        rvItems.apply {
             adapter = SheetDialogAdapter()
             layoutManager = LinearLayoutManager(context)
+
+        }
+        txvTitle.apply {
+            text = title
+            setTextColor(titleColor)
         }
     }
 
@@ -50,15 +63,25 @@ class CustomSheetDialog(context: Context, private val items: List<CustomItemShee
                     dismiss()
                     item.action.invoke()
                 }
-                txvLabel.text = item.title
-                imvIcon.setImageResource(item.icon)
+                txvLabel.apply {
+                    text = item.title
+                    setTextColor(item.titleCor)
+                }
+                item.icon?.let { imvIcon.setImageResource(it) }
             }
         }
     }
 
+    private fun TextView.setTextColor(color: Int?) {
+        color?.let {
+            setTextColor(ContextCompat.getColor(context, it))
+        }
+    }
+
     data class CustomItemSheet(
-        val icon: Int,
+        val icon: Int? = null,
         val title: String?,
+        val titleCor: Int?,
         val action: () -> Unit
     )
 

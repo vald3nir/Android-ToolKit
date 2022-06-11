@@ -5,28 +5,30 @@ import androidx.lifecycle.ViewModel
 
 open class CoreViewModel : ViewModel() {
 
-    var appView: AppView? = null
+    protected var controller: ViewModelController? = null
+
+    fun registerController(controller: ViewModelController) {
+        this.controller = controller
+    }
+
+    fun requireActivityContext(): Activity? {
+        return controller?.requireActivityContext()
+    }
 
     fun getString(id: Int): String? {
-        return appView?.getActivityContext()?.getString(id)
+        return controller?.getString(id)
     }
 
     fun showMessage(message: String?) {
-        appView?.showMessage(message)
-    }
-
-    fun showLoading(show: Boolean) {
-        appView?.showLoading(show)
+        controller?.showMessage(message)
     }
 
     fun showError(it: Exception?) {
-        appView?.showLoading(false)
-        appView?.showMessage(it?.message)
+        controller?.showMessage(it?.message)
     }
 
     fun finish() {
-        appView?.getActivityContext()?.apply {
-            showLoading(false)
+        requireActivityContext()?.apply {
             setResult(Activity.RESULT_OK)
             finish()
         }

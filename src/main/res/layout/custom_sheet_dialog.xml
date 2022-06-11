@@ -12,16 +12,20 @@
         android:padding="10dp">
 
         <TextView
-            style="@style/TittleStyle"
+            android:id="@+id/txv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/options"
-            android:textColor="@color/blue" />
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/blue"
+            android:textSize="22sp"
+            tools:text="title" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_items"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             tools:itemCount="6"
             tools:listitem="@layout/custom_item_list" />
 
