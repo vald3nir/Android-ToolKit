@@ -72,6 +72,21 @@ fun loadFile(
 // Data Storage
 // =================================================================================================
 
+fun updateData(
+    rootPath: String,
+    collectionPath: String,
+    baseDTO: BaseDTO,
+    onSuccess: () -> Unit,
+    onError: (e: Exception?) -> Unit
+) {
+    val db = Firebase.firestore
+    db.collection(rootPath)
+        .document(baseDTO.uid)
+        .collection(collectionPath)
+        .add(baseDTO.toMap())
+        .addOnSuccessListener { _ -> onSuccess.invoke() }
+        .addOnFailureListener { e -> onError.invoke(e) }
+}
 
 fun updateData(
     collectionPath: String,
@@ -111,6 +126,30 @@ fun <T> loadCollection(
     val db = Firebase.firestore
     db.collection(collectionPath).get()
         .addOnSuccessListener {
+            it.documents.map { document ->
+                val data: T? = document.toObject(type)
+                data?.let { it -> items.add(it) }
+            }
+            onSuccess.invoke(items)
+        }
+        .addOnFailureListener { e -> onError.invoke(e) }
+}
+
+
+fun <T> loadCollection(
+    rootPath: String,
+    documentPath: String,
+    collectionPath: String,
+    type: Class<T>,
+    onSuccess: (items: MutableList<T>) -> Unit,
+    onError: (e: Exception?) -> Unit
+) {
+    val items: MutableList<T> = mutableListOf()
+    val db = Firebase.firestore
+    db.collection(rootPath)
+        .document(documentPath)
+        .collection(collectionPath)
+        .get().addOnSuccessListener {
             it.documents.map { document ->
                 val data: T? = document.toObject(type)
                 data?.let { it -> items.add(it) }
