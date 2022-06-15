@@ -2,7 +2,6 @@ package com.vald3nir.toolkit.core
 
 import android.app.Activity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.vald3nir.toolkit.extensions.hideKeyboard
