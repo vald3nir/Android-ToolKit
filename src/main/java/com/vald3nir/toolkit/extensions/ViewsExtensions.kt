@@ -11,7 +11,8 @@ import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
-import com.vald3nir.toolkit.componets.HeaderNavigationComponent
+import com.vald3nir.toolkit.componets.navigation.HeaderNavigationComponent
+
 
 fun Activity.hideKeyboard() {
     hideKeyboard(currentFocus ?: View(this))
