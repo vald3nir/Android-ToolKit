@@ -1,7 +1,6 @@
 package com.vald3nir.toolkit.data.repository.remote.firebase
 
 import android.app.Activity
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -11,8 +10,12 @@ class FirebaseAuthenticator {
         Firebase.auth.signOut()
     }
 
-    fun loadCurrentUser(): FirebaseUser? {
-        return Firebase.auth.currentUser
+    fun getUserID(): String? {
+        return Firebase.auth.currentUser?.uid
+    }
+
+    fun checkUserLogged(): Boolean {
+        return Firebase.auth.currentUser != null
     }
 
     fun signInWithEmailAndPassword(
