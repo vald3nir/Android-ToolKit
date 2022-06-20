@@ -18,12 +18,14 @@ class CustomSpinner : AppCompatSpinner {
     )
 
     var itemSelected = "null"
+    private var items = listOf<String>()
 
     fun setup(
         textColorItemSelected: Int,
         list: List<String>,
         onItemSelected: ((String) -> Unit)? = null
     ) {
+        items = list
         adapter = ArrayAdapter(context, R.layout.simple_spinner_item, list)
         onItemSelectedListener = object : OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
@@ -38,5 +40,9 @@ class CustomSpinner : AppCompatSpinner {
                 onItemSelected?.invoke(itemSelected)
             }
         }
+    }
+
+    fun setSelection(item: String?) {
+        setSelection(items.indexOf(item))
     }
 }
