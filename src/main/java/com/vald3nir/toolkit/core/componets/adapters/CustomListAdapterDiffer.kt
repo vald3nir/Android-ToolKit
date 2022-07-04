@@ -1,4 +1,4 @@
-package com.vald3nir.toolkit.componets.adapters
+package com.vald3nir.toolkit.core.componets.adapters
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,6 +1,6 @@
 package com.vald3nir.toolkit.core
 
-import com.vald3nir.toolkit.extensions.hideKeyboard
+import com.vald3nir.toolkit.utils.extensions.hideKeyboard
 import org.koin.ext.getFullName
 
 abstract class CoreFragmentActivity : CoreActivity() {

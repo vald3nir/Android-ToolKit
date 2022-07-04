@@ -1,4 +1,4 @@
-package com.vald3nir.toolkit.validations
+package com.vald3nir.toolkit.utils.validations
 
 import android.util.Patterns
 

@@ -19,5 +19,5 @@ fun Context.saveDataJson(key: String, data: String?) {
 
 fun Context.loadDataJson(key: String): String? {
     val sharedPref = getLocalPreferences()
-    return sharedPref?.getString(key, null)
+    return sharedPref.getString(key, null)
 }

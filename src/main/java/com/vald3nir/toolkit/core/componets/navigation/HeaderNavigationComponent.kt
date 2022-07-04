@@ -1,4 +1,4 @@
-package com.vald3nir.toolkit.componets.navigation
+package com.vald3nir.toolkit.core.componets.navigation
 
 import android.content.Context
 import android.util.AttributeSet

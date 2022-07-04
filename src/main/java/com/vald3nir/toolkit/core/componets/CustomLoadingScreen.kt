@@ -1,4 +1,4 @@
-package com.vald3nir.toolkit.componets
+package com.vald3nir.toolkit.core.componets
 
 import android.app.Dialog
 import android.content.Context

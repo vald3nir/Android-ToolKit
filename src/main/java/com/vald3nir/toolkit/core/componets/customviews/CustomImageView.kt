@@ -1,16 +1,13 @@
-package com.vald3nir.toolkit.componets.customviews
+package com.vald3nir.toolkit.core.componets.customviews
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.net.Uri
 import android.util.AttributeSet
-import android.util.Base64
 import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
 import com.vald3nir.toolkit.R
-import com.vald3nir.toolkit.extensions.toBitmap
-import java.io.ByteArrayOutputStream
+import com.vald3nir.toolkit.utils.extensions.toBitmap
 
 class CustomImageView : AppCompatImageView {
 

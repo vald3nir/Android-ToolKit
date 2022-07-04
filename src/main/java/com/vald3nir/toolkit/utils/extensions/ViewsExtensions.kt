@@ -1,4 +1,4 @@
-package com.vald3nir.toolkit.extensions
+package com.vald3nir.toolkit.utils.extensions
 
 import android.app.Activity
 import android.content.Context
@@ -11,7 +11,7 @@ import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
-import com.vald3nir.toolkit.componets.navigation.HeaderNavigationComponent
+import com.vald3nir.toolkit.core.componets.navigation.HeaderNavigationComponent
 
 
 fun Activity.hideKeyboard() {

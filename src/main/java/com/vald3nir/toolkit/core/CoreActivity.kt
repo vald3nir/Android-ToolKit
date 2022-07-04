@@ -4,7 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.vald3nir.toolkit.extensions.hideKeyboard
+import com.vald3nir.toolkit.utils.extensions.hideKeyboard
 
 abstract class CoreActivity : AppCompatActivity(), ViewModelController {
 

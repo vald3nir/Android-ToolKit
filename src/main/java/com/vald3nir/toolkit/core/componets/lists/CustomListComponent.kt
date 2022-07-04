@@ -1,4 +1,4 @@
-package com.vald3nir.toolkit.componets.lists
+package com.vald3nir.toolkit.core.componets.lists
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,7 +7,7 @@ import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
-import com.vald3nir.toolkit.extensions.actionClickListener
+import com.vald3nir.toolkit.utils.extensions.actionClickListener
 import com.vald3nir.toolkit.databinding.CustomListComponentBinding
 
 class CustomListComponent : LinearLayout {

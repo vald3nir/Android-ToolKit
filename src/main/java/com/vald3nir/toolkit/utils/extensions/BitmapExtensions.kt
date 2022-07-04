@@ -1,4 +1,4 @@
-package com.vald3nir.toolkit.extensions
+package com.vald3nir.toolkit.utils.extensions
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory

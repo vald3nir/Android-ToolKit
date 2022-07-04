@@ -1,4 +1,4 @@
-package com.vald3nir.toolkit.componets.customviews
+package com.vald3nir.toolkit.core.componets.customviews
 
 import android.content.Context
 import android.util.AttributeSet
