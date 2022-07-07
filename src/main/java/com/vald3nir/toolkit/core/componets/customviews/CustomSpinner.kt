@@ -50,7 +50,7 @@ class CustomSpinner : AppCompatSpinner {
         }
     }
 
-    fun setSelection(item: String?) {
-        setSelection(items.indexOf(item))
+    fun setItemSelection(item: String?) {
+        item?.let { setSelection(items.indexOf(it)) }
     }
 }
