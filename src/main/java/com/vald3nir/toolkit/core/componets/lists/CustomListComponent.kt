@@ -7,8 +7,8 @@ import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
-import com.vald3nir.toolkit.utils.extensions.actionClickListener
 import com.vald3nir.toolkit.databinding.CustomListComponentBinding
+import com.vald3nir.toolkit.utils.extensions.actionClickListener
 
 class CustomListComponent : LinearLayout {
 
@@ -41,18 +41,8 @@ class CustomListComponent : LinearLayout {
         }
     }
 
-    fun setTab(tab: CustomListTab) {
-        val tabs = listOf(tab)
-        binding.tblOptions.apply {
-            tabs.forEach { tab ->
-                addTab(newTab().setText(tab.title))
-            }
-            actionClickListener { position ->
-                tabs[position].onTabSelectedListener.invoke()
-            }
-            isVisible = true
-            tabGravity = TabLayout.GRAVITY_FILL
-        }
+    fun setTab(title: String) {
+        setTabs(listOf(CustomListTab(title = title)))
     }
 
     fun notifyListSize(size: Int) {
