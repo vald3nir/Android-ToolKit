@@ -29,32 +29,32 @@ open class CustomButton : LinearLayout {
         setBackgroundResource(0)
     }
 
-    protected val binding = CustomButtonBinding.inflate(LayoutInflater.from(context), this, true)
-
-    fun setButtonTitle(title: String?) {
-        binding.button.text = title
+    val binding by lazy {
+        CustomButtonBinding.inflate(
+            LayoutInflater.from(context),
+            this,
+            true
+        )
     }
 
-    fun setButtonTitle(title: Int) {
-        binding.button.apply {
-            text = context.getText(title)
+    protected fun setup(
+        title: String?,
+        titleColor: Int?,
+        rootDrawable: Int?,
+        clickListener: () -> Unit,
+    ) {
+        binding.apply {
+            root.apply {
+                rootDrawable?.let { setBackgroundResource(it) }
+            }
+            button.apply {
+                text = title
+                titleColor?.let {
+                    setTextColor(ContextCompat.getColor(context, it))
+                }
+                setOnClickListener { clickListener.invoke() }
+            }
         }
-    }
-
-    fun setButtonTitleColor(color: Int) {
-        binding.button.apply {
-            setTextColor(ContextCompat.getColor(context, color))
-        }
-    }
-
-    fun setRootDrawable(drawable: Int) {
-        binding.root.apply {
-            setBackgroundResource(drawable)
-        }
-    }
-
-    fun setButtonClickListener(listener: () -> Unit) {
-        binding.button.setOnClickListener { listener.invoke() }
     }
 
     fun showLoading(show: Boolean) {
