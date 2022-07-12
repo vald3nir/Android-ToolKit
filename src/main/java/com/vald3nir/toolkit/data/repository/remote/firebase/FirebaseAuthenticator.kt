@@ -18,6 +18,24 @@ class FirebaseAuthenticator {
         return Firebase.auth.currentUser != null
     }
 
+    fun createUserWithEmailAndPassword(
+        activity: Activity,
+        email: String,
+        password: String,
+        onSuccess: () -> Unit,
+        onError: (e: Exception?) -> Unit
+    ) {
+        Firebase.auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(activity) {
+                if (it.isSuccessful) {
+                    onSuccess.invoke()
+                } else {
+                    onError.invoke(it.exception)
+                }
+            }
+            .addOnFailureListener { e -> onError.invoke(e) }
+    }
+
     fun signInWithEmailAndPassword(
         activity: Activity,
         email: String,

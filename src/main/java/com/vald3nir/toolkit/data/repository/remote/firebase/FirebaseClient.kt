@@ -6,7 +6,7 @@ import com.vald3nir.toolkit.data.dto.BaseDTO
 
 class FirebaseClient {
 
-    fun updateData(
+    fun insertOrUpdateData(
         rootPath: String,
         document: String,
         collection: String,
