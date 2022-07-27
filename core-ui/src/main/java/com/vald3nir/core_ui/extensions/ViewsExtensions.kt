@@ -8,11 +8,15 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.vald3nir.core_ui.components.HeaderNavigationComponent
 
+fun Fragment.hideKeyboard() {
+    activity?.hideKeyboard()
+}
 
 fun Activity.hideKeyboard() {
     hideKeyboard(currentFocus ?: View(this))

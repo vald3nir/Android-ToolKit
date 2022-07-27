@@ -45,3 +45,7 @@ fun <T> baseDiffUtil(): DiffUtil.ItemCallback<T> = object : DiffUtil.ItemCallbac
         return oldItem == newItem
     }
 }
+
+fun <T> String?.toDTO(classOfT: Class<T>): T {
+    return Gson().fromJson(this, classOfT)
+}

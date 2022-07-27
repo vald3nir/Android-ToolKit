@@ -1,8 +1,8 @@
 package com.vald3nir.core_ui
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 
 abstract class CoreFragment : Fragment(), ViewModelController {
 
@@ -17,8 +17,12 @@ abstract class CoreFragment : Fragment(), ViewModelController {
         }
     }
 
-    override fun requireActivityContext(): Activity? {
-        return activity
+    fun navigationToFragment(fragmentID: Int) {
+        findNavController().navigate(fragmentID)
+    }
+
+    override fun requireActivityContext(): CoreActivity? {
+        return activity as CoreActivity
     }
 
     override fun onBackPressed() {
@@ -36,5 +40,9 @@ abstract class CoreFragment : Fragment(), ViewModelController {
 
     override fun showMessage(message: Int) {
         coreActivity?.showMessage(message)
+    }
+
+    override fun finishWithResult() {
+        coreActivity?.finishWithResult()
     }
 }

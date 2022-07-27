@@ -25,7 +25,7 @@ abstract class CoreActivity : AppCompatActivity(), ViewModelController {
         super.onDestroy()
     }
 
-    override fun requireActivityContext(): Activity? {
+    override fun requireActivityContext(): CoreActivity? {
         return this
     }
 
@@ -43,5 +43,10 @@ abstract class CoreActivity : AppCompatActivity(), ViewModelController {
             toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
             toast?.show()
         }
+    }
+
+    override fun finishWithResult() {
+        setResult(Activity.RESULT_OK)
+        finish()
     }
 }

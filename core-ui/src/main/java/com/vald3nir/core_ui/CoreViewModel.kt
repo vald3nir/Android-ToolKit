@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 
 open class CoreViewModel : ViewModel() {
 
-    protected var controller: ViewModelController? = null
+    private var controller: ViewModelController? = null
 
     fun registerController(controller: ViewModelController) {
         this.controller = controller
@@ -27,10 +27,11 @@ open class CoreViewModel : ViewModel() {
         controller?.showMessage(it?.message)
     }
 
-    fun finish() {
-        requireActivityContext()?.apply {
-            setResult(Activity.RESULT_OK)
-            finish()
-        }
+    fun finishWithResult() {
+        controller?.finishWithResult()
+    }
+
+    fun onBackPressed() {
+        controller?.onBackPressed()
     }
 }

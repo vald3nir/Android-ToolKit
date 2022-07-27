@@ -32,7 +32,11 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
 
     // GSON
-    implementation 'com.google.code.gson:gson:2.9.0'
+    api 'com.google.code.gson:gson:2.9.0'
+
+    // Retrofit valdenir trocar por implementation
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
+    api 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:30.2.0')

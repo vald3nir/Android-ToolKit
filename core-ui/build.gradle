@@ -32,24 +32,28 @@ android {
 dependencies {
 
     // Android X
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
-    implementation 'androidx.annotation:annotation:1.4.0'
-    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    api 'androidx.constraintlayout:constraintlayout:2.1.4'
+    api 'androidx.core:core-ktx:1.8.0'
+    api 'androidx.appcompat:appcompat:1.4.2'
+    api 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
+    api 'androidx.annotation:annotation:1.4.0'
+    api 'androidx.vectordrawable:vectordrawable:1.1.0'
+
+    // Navigation
+    api 'androidx.navigation:navigation-fragment-ktx:2.5.0'
+    api 'androidx.navigation:navigation-ui-ktx:2.5.0'
 
     // Material Design
-    implementation 'com.google.android.material:material:1.6.1'
+    api 'com.google.android.material:material:1.6.1'
 
     // Image Loader
-    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    api 'com.github.bumptech.glide:glide:4.13.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
 
     // Koin (dependency injection framework)
-    implementation "io.insert-koin:koin-androidx-ext:2.2.3"
-    implementation "io.insert-koin:koin-androidx-viewmodel:2.2.3"
+    api "io.insert-koin:koin-androidx-ext:2.2.3"
+    api "io.insert-koin:koin-androidx-viewmodel:2.2.3"
 
     // Tests
     testImplementation 'junit:junit:4.13.2'
